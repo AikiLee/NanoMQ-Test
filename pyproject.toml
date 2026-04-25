@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nanomq-learning-demo"
+version = "0.1.0"
+description = "Learning-focused NanoMQ API and MQTT automation demo"
+requires-python = ">=3.11"
+dependencies = [
+  "allure-pytest==2.13.5",
+  "jsonschema==4.23.0",
+  "paho-mqtt==2.1.0",
+  "pydantic==2.11.4",
+  "pytest==8.3.5",
+  "python-dotenv==1.1.0",
+  "PyYAML==6.0.2",
+  "requests==2.32.3"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["api_clients*", "config*", "models*", "mock_subscriber*", "services*", "utils*", "tests*"]
