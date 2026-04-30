@@ -1,0 +1,13 @@
+[
+  {
+    "device": "edge-sensor-001",
+    "command": "set_interval",
+    "value": 5,
+    "request_id": "cmd-002"
+  },
+  {
+    "device": "edge-sensor-001",
+    "command": "report_status",
+    "request_id": "cmd-003"
+  }
+]

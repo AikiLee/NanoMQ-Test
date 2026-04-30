@@ -1,0 +1,6 @@
+{
+  "device": "edge-sensor-001",
+  "temperature": 35.5,
+  "humidity": 61,
+  "location": "room-a"
+}

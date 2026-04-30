@@ -1,0 +1,6 @@
+{
+  "topic": "edge/device/command",
+  "qos": 0,
+  "retain": false,
+  "clientid": "bad-publisher"
+}

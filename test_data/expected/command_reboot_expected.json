@@ -1,0 +1,5 @@
+{
+  "device": "edge-sensor-001",
+  "command": "reboot",
+  "request_id": "cmd-001"
+}

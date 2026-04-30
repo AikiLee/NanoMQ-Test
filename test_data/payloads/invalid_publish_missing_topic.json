@@ -1,0 +1,6 @@
+{
+  "payload": "{\"device\":\"edge-sensor-001\",\"temperature\":35.5}",
+  "qos": 0,
+  "retain": false,
+  "clientid": "bad-publisher"
+}
