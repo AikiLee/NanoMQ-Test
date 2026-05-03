@@ -20,8 +20,20 @@ def _suffix() -> str:
 
 
 def unique_client_id(prefix: str = "study-client") -> str:
+    """
+    根据传入prefix构造client-id
+
+    Args:
+        prefix (str, optional): _description_. Defaults to "study-client".
+    """
     return f"{prefix}-{_suffix()}"
 
 
 def unique_topic(prefix: str = "study-topic") -> str:
+    """
+    根据传入参数构建topic
+
+    Args:
+        prefix (str, optional): _description_. Defaults to "study-topic".
+    """
     return f"{prefix}/{_suffix()}"

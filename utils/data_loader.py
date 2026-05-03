@@ -11,6 +11,18 @@ import yaml
 
 
 def load_json(path: str | Path) -> dict[str, Any]:
+    """
+    从json文件中加载数据，
+
+    Args:
+        path (str | Path): _description_
+
+    Raises:
+        ValueError: _description_
+
+    Returns:
+        dict[str, Any]: _description_
+    """
     file_path = Path(path)
     try:
         with file_path.open("r", encoding="utf-8") as f:
