@@ -16,6 +16,9 @@ publish_message(topic: str, payload: dict)
 这里很明显就是复用BaseClient中的提供的功能实现基础功能
 """
 
+import json
+from typing import Any
+
 from api_clients.base_client import BaseClient
 
 
@@ -38,6 +41,11 @@ class NanoMqttApiClient(BaseClient):
     def get_topic_tree(self):
         return self.get("/topic-tree")
 
-    def publish_message(self, topic: str, payload: dict):
-        body = {"topic": topic, "payload": payload}
+    def publish_message(self, topic: str, payload: Any):
+        publish_payload = (
+            json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            if isinstance(payload, dict | list)
+            else payload
+        )
+        body = {"topic": topic, "payload": publish_payload}
         return self.post("/mqtt/publish", json=body)

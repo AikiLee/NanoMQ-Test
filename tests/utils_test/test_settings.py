@@ -7,6 +7,7 @@ def test_settings_has_default_values():
     assert settings.request_timeout > 0
     assert settings.poll_interval > 0
     assert settings.nanomq_mqtt_host != "localhost"
+    assert "://" not in settings.nanomq_mqtt_host
 
 
 def test_settings_has_test_env():
