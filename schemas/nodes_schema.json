@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["code", "data"],
+  "properties": {
+    "code": {
+      "const": 0
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["connections", "node_status", "uptime", "version"],
+        "properties": {
+          "connections": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "node_status": {
+            "type": "string"
+          },
+          "uptime": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["metrics", "cpuinfo", "memory", "connections"],
+  "properties": {
+    "metrics": {
+      "type": "array"
+    },
+    "cpuinfo": {
+      "type": ["string", "number"]
+    },
+    "memory": {
+      "type": ["string", "number", "integer"]
+    },
+    "connections": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": true
+}

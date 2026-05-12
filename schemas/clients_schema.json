@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["code", "data"],
+  "properties": {
+    "code": {
+      "const": 0
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "client_id",
+          "username",
+          "keepalive",
+          "conn_state",
+          "clean_start",
+          "proto_name",
+          "proto_ver"
+        ],
+        "properties": {
+          "client_id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "keepalive": {
+            "type": "integer"
+          },
+          "conn_state": {
+            "type": "string",
+            "enum": ["connected", "idle", "disconnected"]
+          },
+          "clean_start": {
+            "type": "boolean"
+          },
+          "proto_name": {
+            "type": "string"
+          },
+          "proto_ver": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

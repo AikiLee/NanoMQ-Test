@@ -69,6 +69,28 @@ pytest -v --alluredir=allure-results
 pytest -v tests/test_publish --alluredir=allure-results
 ```
 
+## Local NanoMQ mTLS Check
+
+Generate temporary certificates and a NanoMQ TLS config:
+
+```bash
+./venv/bin/python scripts/prepare_nanomq_mtls.py
+```
+
+Start NanoMQ with the generated config:
+
+```bash
+nanomq start --conf .tmp/nanomq-mtls/nanomq-mtls.conf
+```
+
+Then run the mTLS E2E checks:
+
+```bash
+RUN_NANOMQ_MTLS_E2E=1 ./venv/bin/pytest tests/test_e2e/test_nanomq_mtls.py -v
+```
+
+The generated materials live under `.tmp/nanomq-mtls/` and are intentionally ignored by git.
+
 ## Test Groups
 
 - `tests/test_health/`: HTTP API root, nodes, brokers, metrics.
