@@ -12,12 +12,20 @@ delete(endpoint: str, **kwargs)
 close()
 """
 
-import httpx
+import json
 import time
+
+import httpx
+
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
 RETRYABLE_STATUS_CODES = {502, 503, 504}
+
+try:
+    import allure
+except ImportError:  # pragma: no cover - allure is optional at runtime
+    allure = None
 
 
 class BaseClient:
@@ -68,6 +76,7 @@ class BaseClient:
             except httpx.HTTPError as exc:
                 raise
             logger.info("Response %s -> %s", url, response.status_code)
+            self._attach_allure_http_exchange(method, kwargs, response)
             if not self._should_retry(method, response, attempt, attempts):
                 return response
             last_response = response
@@ -97,3 +106,44 @@ class BaseClient:
 
     def close(self) -> None:
         self.client.close()
+
+    def _attach_allure_http_exchange(
+        self,
+        method: str,
+        request_kwargs: dict,
+        response: httpx.Response,
+    ) -> None:
+        if allure is None:
+            return
+
+        request_payload = {
+            "method": method.upper(),
+            "url": str(response.request.url),
+        }
+        for key in ("params", "json", "data"):
+            if key in request_kwargs:
+                request_payload[key] = request_kwargs[key]
+
+        response_payload = {
+            "status_code": response.status_code,
+            "url": str(response.request.url),
+            "body": _response_body(response),
+        }
+
+        allure.attach(
+            json.dumps(request_payload, ensure_ascii=False, indent=2, default=str),
+            name=f"{method.upper()} request",
+            attachment_type=allure.attachment_type.JSON,
+        )
+        allure.attach(
+            json.dumps(response_payload, ensure_ascii=False, indent=2, default=str),
+            name=f"{method.upper()} response {response.status_code}",
+            attachment_type=allure.attachment_type.JSON,
+        )
+
+
+def _response_body(response: httpx.Response):
+    try:
+        return response.json()
+    except ValueError:
+        return response.text

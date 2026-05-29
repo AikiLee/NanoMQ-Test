@@ -6,10 +6,15 @@ result set. These tests create a real MQTT client first, then verify the HTTP AP
 state filters against that known client. This keeps the reproduction stable:
 if NanoMQ ignores `conn_state`, the same live client appears in the disconnected
 query and the test fails deterministically.
+
+
+
+
 """
 
 from threading import Event
 
+import allure
 import paho.mqtt.client as mqtt
 import pytest
 
@@ -48,6 +53,11 @@ def connected_mqtt_client_id():
         client.disconnect()
 
 
+@allure.epic("NanoMQ")
+@allure.feature("Regression")
+@allure.story("Clients conn_state connected filter")
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.tag("regression", "known-bug", "issue-2279", "clients")
 def test_clients_conn_state_connected_filter_returns_live_client(
     nanomq_api_client, connected_mqtt_client_id
 ):
@@ -73,6 +83,11 @@ def test_clients_conn_state_connected_filter_returns_live_client(
     )
 
 
+@allure.epic("NanoMQ")
+@allure.feature("Regression")
+@allure.story("Clients conn_state disconnected filter")
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.tag("regression", "known-bug", "issue-2279", "clients")
 def test_clients_conn_state_disconnected_filter_excludes_live_client(
     nanomq_api_client, connected_mqtt_client_id
 ):

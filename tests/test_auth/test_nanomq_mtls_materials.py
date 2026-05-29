@@ -2,6 +2,7 @@ import importlib.util
 import subprocess
 from pathlib import Path
 
+import allure
 import pytest
 
 
@@ -9,6 +10,11 @@ SCRIPT_PATH = Path("scripts/prepare_nanomq_mtls.py")
 
 
 @pytest.mark.tls
+@allure.epic("NanoMQ")
+@allure.feature("Auth")
+@allure.story("Generate mTLS materials")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("auth", "tls", "mtls-offline")
 def test_prepare_nanomq_mtls_generates_expected_materials(tmp_path):
     module = _load_prepare_module()
 
@@ -40,6 +46,11 @@ def test_prepare_nanomq_mtls_generates_expected_materials(tmp_path):
 
 
 @pytest.mark.tls
+@allure.epic("NanoMQ")
+@allure.feature("Auth")
+@allure.story("Validate generated certificate chains")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("auth", "tls", "mtls-offline")
 def test_generated_materials_validate_expected_chains(tmp_path):
     module = _load_prepare_module()
     module.prepare_materials(tmp_path)
@@ -86,6 +97,11 @@ def test_generated_materials_validate_expected_chains(tmp_path):
 
 
 @pytest.mark.tls
+@allure.epic("NanoMQ")
+@allure.feature("Auth")
+@allure.story("Reject wrong device certificate")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("auth", "tls", "mtls-offline")
 def test_wrong_device_certificate_is_not_trusted_by_generated_root(tmp_path):
     module = _load_prepare_module()
     module.prepare_materials(tmp_path)

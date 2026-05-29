@@ -2,6 +2,7 @@ import json
 from queue import Empty, Queue
 from threading import Event
 
+import allure
 import paho.mqtt.client as mqtt
 import pytest
 
@@ -12,6 +13,11 @@ from utils.poller import wait_until
 
 
 @pytest.mark.e2e
+@allure.epic("NanoMQ")
+@allure.feature("E2E")
+@allure.story("HTTP publish reaches MQTT subscriber")
+@allure.severity(allure.severity_level.CRITICAL)
+@allure.tag("e2e", "publish", "mqtt")
 def test_http_publish_reaches_mqtt_subscriber(nanomq_api_client):
     client_id = unique_client_id("study-e2e-subscriber")
     topic = unique_topic("study/e2e")

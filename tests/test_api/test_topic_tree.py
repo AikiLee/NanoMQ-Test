@@ -2,6 +2,8 @@
 NanoMQ /topic-tree API tests.
 """
 
+import allure
+
 from tests.test_api.api_assertions import (
     assert_data_list_body,
     assert_not_found,
@@ -9,6 +11,11 @@ from tests.test_api.api_assertions import (
 )
 
 
+@allure.epic("NanoMQ")
+@allure.feature("HTTP API")
+@allure.story("Topic tree API")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("api", "topic-tree")
 class TestTopicTree:
     """
     get测试方案:

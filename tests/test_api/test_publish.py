@@ -2,6 +2,8 @@
 NanoMQ /mqtt/publish API tests.
 """
 
+import allure
+
 from tests.test_api.api_assertions import (
     assert_not_found,
     assert_success_body,
@@ -10,6 +12,11 @@ from tests.test_api.api_assertions import (
 from utils.naming import unique_topic
 
 
+@allure.epic("NanoMQ")
+@allure.feature("HTTP API")
+@allure.story("MQTT publish API")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("api", "publish")
 class TestPublish:
     """
     post测试方案:

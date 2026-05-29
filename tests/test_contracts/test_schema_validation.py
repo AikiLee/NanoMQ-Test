@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from utils.naming import unique_topic
@@ -5,6 +6,11 @@ from utils.schema_validator import validate_schema
 
 
 @pytest.mark.contract
+@allure.epic("NanoMQ")
+@allure.feature("Contract")
+@allure.story("JSON schema validation")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("contract")
 class TestSchemaValidation:
     def test_nodes_schema(self, nanomq_api_client):
         response = nanomq_api_client.get_nodes()

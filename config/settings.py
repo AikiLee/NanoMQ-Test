@@ -21,7 +21,7 @@ load_dotenv(ENVIRONMENT_FILE, override=True)
 
 # .env覆盖其他env配置
 if ENV_FILE.exists():
-    load_dotenv(ENV_FILE)
+    load_dotenv(ENV_FILE, override=True)
 
 
 def _mqtt_host(value: str) -> str:

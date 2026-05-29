@@ -1,11 +1,6 @@
-"""
-新建 practice/tests/test_nanomq_api.py。
-覆盖：
-● GET /nodes
-● GET /metrics
-"""
-
+import allure
 import pytest
+
 from api_clients.nanomqtt_api_client import NanoMqttApiClient
 from config.settings import settings
 
@@ -36,6 +31,11 @@ def _first_node(response):
     return body["data"][0]
 
 
+@allure.epic("NanoMQ")
+@allure.feature("HTTP API")
+@allure.story("Nodes API")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("api", "nodes")
 class TestNodes:
     """
     get测试方案:

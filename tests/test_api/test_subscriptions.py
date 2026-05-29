@@ -2,6 +2,8 @@
 NanoMQ /subscriptions API tests.
 """
 
+import allure
+
 from tests.test_api.api_assertions import (
     assert_data_list_body,
     assert_success_body,
@@ -9,6 +11,11 @@ from tests.test_api.api_assertions import (
 )
 
 
+@allure.epic("NanoMQ")
+@allure.feature("HTTP API")
+@allure.story("Subscriptions API")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("api", "subscriptions")
 class TestSubscriptions:
     """
     get测试方案:

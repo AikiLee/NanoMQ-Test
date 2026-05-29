@@ -24,7 +24,6 @@ import pytest
 
 from utils.naming import unique_client_id, unique_topic
 
-
 MANIFEST_PATH = Path(".tmp/nanomq-mtls/manifest.json")
 
 
@@ -153,7 +152,7 @@ def _new_tls_client(
     """Create a paho client configured to verify NanoMQ and optionally present a cert."""
     certs = mtls_manifest["certificates"]
     client = mqtt.Client(
-        callback_api_version=mqtt.CallbackAPIVersion.VERSION2,
+        callback_api_version=mqtt.CallbackAPIVersion.VERSION2,  # type: ignore
         client_id=client_id,
         protocol=mqtt.MQTTv311,
     )
@@ -181,7 +180,9 @@ def _assert_rejected(client, mtls_manifest) -> None:
 
     client.on_connect = on_connect
     client.on_disconnect = on_disconnect
-
+    #     curl -X POST http://115.220.4.113:3001/auth \
+    #   -H "Content-Type: application/json" \
+    #   -d '{"username":"admin","password":"password123"}'
     try:
         # Rejection can happen either during TLS handshake or immediately after
         # MQTT starts processing the failed TLS session.

@@ -2,6 +2,7 @@
 NanoMQ /metrics API tests.
 """
 
+import allure
 import pytest
 
 from api_clients.nanomqtt_api_client import NanoMqttApiClient
@@ -32,6 +33,11 @@ def _metrics_body(response):
     return body
 
 
+@allure.epic("NanoMQ")
+@allure.feature("HTTP API")
+@allure.story("Metrics API")
+@allure.severity(allure.severity_level.NORMAL)
+@allure.tag("api", "metrics")
 class TestMetrics:
     """
     get测试方案:
